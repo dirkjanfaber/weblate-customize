@@ -37,10 +37,16 @@ For translators who come from a simpler tool (POEditor), aiming for a calmer int
   - Screenshots of the string being edited are shown in Zen.
   - An empty translation shows its translation memory matches; a copied match is marked as needing editing, as in
     the full editor.
+
+  ![Zen side by side: a list of strings, the one being edited with its screenshots](screenshots/zen.png)
+
 - **Search shows why a string matches**: a plain word also matches the translation, but Weblate highlights matches
   only in the source, so the script highlights them in the translation too (CSS Custom Highlight API). The Filters
   menu gets "everywhere / source only / translation only" entries, which rewrite the query with `source:` or
   `target:`. These keep `state:` terms, date ranges, quoted values and URLs intact.
+
+  ![A search for "EV" with the matches marked in the translation, and the Filters menu](screenshots/search.png)
+
 - **Hides "Read-only strings"** on the language page, because it leads to an empty list (#22916).
 - **Dark mode** follows Weblate's own theme setting as well as the system one; muted text meets AA contrast.
 - **Defaults for new users** (`customize-app/apps.py`, Weblate has no setting for these):
