@@ -1,0 +1,1407 @@
+/*
+ * Victron Translations: a calmer Weblate for translators.
+ *
+ * Loaded on every page through WEBLATE_EXTRA_HTML_HEAD (see environment.template)
+ * and served from Weblate's "customize" app (see docker-compose.yml). Only CSS:
+ * nothing is removed from Weblate, and everything hidden here is still
+ * reachable (a wider window, the menus, or the Zen mode / editor settings).
+ * Selectors are Weblate's own classes; check this file after a Weblate upgrade.
+ */
+
+@import url("flags.css?v=3");
+
+/* The look of gallery.victronenergy.com (its css/variables/colors.css): blue
+   #005fbe, darker #00499f and #042f60; cards in a warm off-white with a light
+   border; round buttons, tabs and search fields. */
+:root {
+	--vt-radius: 10px;
+	--vt-pill: 50rem;
+	--vt-border: #e6e5e1;
+	--vt-surface: #faf9f5;
+	--vt-muted: #5c636a; /* AA (4.5:1) on every surface, #e6e5e1 too */
+}
+
+/* --- Victron blue instead of Weblate's teal ---------------------------------
+   The appearance settings (apply-appearance.sh) cover the header, links and
+   progress bars; these are the teal colours they leave: the open menu in the
+   header, buttons, dropdown and search accents. Status colours (translated is
+   green, failing check is red) stay, they carry meaning. "html:root" outranks
+   Weblate's ":root" whatever the load order. */
+
+html:root {
+	--wl-color-primary: #005fbe;
+	--wl-color-primary-strong: #00499f;
+	--wl-color-link-strong: #00499f;
+	--wl-color-accent-bg: #005fbe;
+	--wl-color-search-icon: #005fbe;
+	--wl-header-text-hover: #f7ab3e;
+	--bs-emphasis-color: #005fbe;
+	--bs-emphasis-color-rgb: 0, 95, 190;
+	--bs-primary: #042f60;
+	--bs-primary-rgb: 4, 47, 96;
+}
+
+html:root .dropdown-menu {
+	--bs-dropdown-link-active-bg: #005fbe;
+}
+
+html:root .btn-info,
+html:root .btn-outline-primary {
+	--bs-btn-color: var(--wl-color-link);
+	--bs-btn-bg: var(--vt-surface);
+	--bs-btn-border-color: var(--vt-border);
+	--bs-btn-hover-bg: #005fbe;
+	--bs-btn-hover-border-color: #005fbe;
+	--bs-btn-active-bg: #00499f;
+	--bs-btn-active-border-color: #00499f;
+	--bs-btn-disabled-color: var(--vt-muted);
+}
+
+html:root .btn-warning {
+	--bs-btn-bg: #005fbe !important;
+	--bs-btn-border-color: #005fbe !important;
+	--bs-btn-hover-bg: #00499f !important;
+	--bs-btn-hover-border-color: #00499f !important;
+}
+
+/* Dark: Weblate's theme, which its profile setting chooses (or the system's,
+   for "Sync with system"); not the system's alone, or the two disagree. */
+html:root[data-bs-theme="dark"] {
+	--vt-border: rgba(255, 255, 255, 0.1);
+	--vt-surface: rgba(255, 255, 255, 0.03);
+	--wl-color-primary: #387DC5;
+	--wl-color-primary-strong: #73A2D3;
+	--wl-color-link-strong: #ABC7E5;
+	--wl-color-accent-bg: #387DC5;
+	--wl-color-search-icon: #73A2D3;
+	--bs-emphasis-color: #73A2D3;
+	--bs-emphasis-color-rgb: 115, 162, 211;
+}
+
+html:root[data-bs-theme="dark"] .btn-info,
+html:root[data-bs-theme="dark"] .btn-outline-primary {
+	--bs-btn-bg: transparent;
+	--bs-btn-border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Weblate's dark primary button takes the link colour: too pale for white text. */
+html:root[data-bs-theme="dark"] .btn-primary {
+	--bs-btn-bg: #005fbe;
+	--bs-btn-border-color: #005fbe;
+	--bs-btn-hover-bg: #00499f;
+	--bs-btn-hover-border-color: #00499f;
+	--bs-btn-active-bg: #00499f;
+}
+
+html:root[data-bs-theme="dark"] .btn-warning {
+	--bs-btn-bg: var(--bs-dark) !important;
+	--bs-btn-border-color: var(--bs-dark) !important;
+	--bs-btn-hover-bg: #387DC5 !important;
+	--bs-btn-hover-border-color: #387DC5 !important;
+}
+
+/* --- Everywhere: softer cards, more air ----------------------------------- */
+
+.card {
+	border-color: var(--vt-border);
+	border-radius: var(--vt-radius);
+}
+
+.card-header {
+	background: transparent;
+	border-bottom-color: var(--vt-border);
+	font-weight: 600;
+}
+
+/* The green "Translation" header becomes a plain header like the others
+   (html:root outranks Weblate's dark rules for it). */
+html:root .card-header.text-bg-success,
+html:root .card:has(> .card-header.text-bg-success) > .card-header {
+	background: transparent !important;
+	color: inherit !important;
+}
+
+html:root .card:has(> .card-header.text-bg-success) {
+	border-color: var(--vt-border);
+}
+
+.btn,
+.nav-pills .nav-link,
+.navbar input[type="search"],
+.navbar .form-control {
+	border-radius: var(--vt-pill);
+}
+
+/* --- The gallery's page head and footer ------------------------------------
+   The header and the page title under it are one blue band, the title large
+   and white, as the gallery's front page; the footer is its navy. */
+
+:root {
+	--vt-band: #00499f;
+	--vt-navy: #05162c;
+}
+
+html:root[data-bs-theme="dark"] {
+	--vt-band: #042f60;
+}
+
+header {
+	background: var(--vt-band);
+}
+
+header > h1 {
+	margin: 0;
+	padding: 1.25rem 15px 1.75rem;
+	color: #fff;
+}
+
+header .breadcrumb {
+	font-size: 1.9rem;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+header .breadcrumb a,
+header .breadcrumb .btn-link {
+	color: #fff !important; /* Weblate: the text colour, with !important */
+}
+
+header .breadcrumb-item + .breadcrumb-item::before {
+	color: rgba(255, 255, 255, 0.45);
+}
+
+header .bread-icon path {
+	fill: rgba(255, 255, 255, 0.7);
+}
+
+header .bread-icon svg {
+	width: 1.6rem;
+	height: 1.6rem;
+}
+
+/* Translate and Zen pages: the strings need the room, so a slimmer band. */
+body:has(.main-content.js-editor) header .breadcrumb {
+	font-size: 1.3rem;
+}
+
+body:has(.main-content.js-editor) header > h1 {
+	padding-top: 0;
+	padding-bottom: 0.25rem;
+}
+
+/* Scrolling past either end shows the canvas: the header's blue above the
+   page, the footer's navy below it. The footer sits at the bottom of the
+   window on a short page, so the canvas shows nowhere else. */
+html:root {
+	background: linear-gradient(var(--vt-band) 50%, var(--vt-navy) 50%) fixed;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: var(--bs-body-bg);
+}
+
+body > footer {
+	margin-top: auto !important;
+}
+
+body > .main-content {
+	margin-bottom: 4rem;
+}
+
+footer {
+	padding: 2rem 1rem 2.5rem;
+	background: var(--vt-navy);
+}
+
+footer li {
+	color: rgba(199, 221, 240, 0.7);
+}
+
+footer a {
+	color: #fff;
+}
+
+/* --- Dark: the gallery's navy, not Weblate's grey ---------------------------
+   Weblate sets the page colour with !important in its dark stylesheet. */
+
+html:root[data-bs-theme="dark"] {
+	--bs-body-bg: #05162c !important;
+	--bs-body-bg-rgb: 5, 22, 44;
+	--bs-body-color: #e6e5e1 !important;
+	--bs-border-color: #1d3554 !important;
+	--bs-secondary-bg: #0c2443;
+	--bs-tertiary-bg: #0a1f3a;
+	--bs-dark: #042f60;
+	--bs-dark-rgb: 4, 47, 96;
+	--background-color: #05162c;
+	--wl-color-bg: #05162c;
+	--wl-color-text: #e6e5e1;
+	--wl-color-text-muted: #a9bfd6;
+	--wl-color-surface: #0a1f3a;
+	--wl-color-surface-alt: #0c2443;
+	--wl-color-border: #1d3554;
+	--wl-color-border-strong: #24405f;
+	--wl-color-border-input: #24405f;
+	--wl-color-translate-bg: #0c2443;
+	--wl-color-translate-current-bg: #0a1f3a;
+	--wl-color-row-hover: #0c2443;
+	--wl-color-tribute-bg: #0c2443;
+	--wl-color-info-soft: #0c2443;
+	--wl-color-progress-stripe: #0a1f3a;
+	--wl-progress-bg: #12304f;
+	--vt-muted: #8ea6c2;
+}
+
+/* Weblate's dark stylesheet paints the page and every field grey, without
+   its variables (the page with !important). */
+html[data-bs-theme="dark"] {
+	background: linear-gradient(var(--vt-band) 50%, var(--vt-navy) 50%) fixed !important;
+}
+
+html[data-bs-theme="dark"] body {
+	background-color: var(--wl-color-bg) !important;
+}
+
+/* Not Weblate's editor fields: their text is the overlay underneath. */
+html[data-bs-theme="dark"] :is(.form-control, .form-select):not(.editor-wrap > textarea) {
+	background-color: var(--wl-color-surface);
+}
+
+html[data-bs-theme="dark"] .navbar .form-control {
+	border-color: rgba(255, 255, 255, 0.2);
+	background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Messages ("Your profile has been updated"): the gallery's green and blue
+   instead of Weblate's olive and teal. */
+html:root .alert {
+	border-radius: var(--vt-radius);
+}
+
+html:root .alert-success {
+	border-color: #a0d87b;
+	background-color: #f1f9eb;
+	color: #2d5a12;
+}
+
+html:root .alert-info {
+	border-color: #c7ddf0;
+	background-color: #f2f7fc;
+	color: #042f60;
+}
+
+html:root[data-bs-theme="dark"] .alert-success {
+	border-color: rgba(160, 216, 123, 0.4);
+	background-color: rgba(160, 216, 123, 0.1);
+	color: #c6eaad;
+}
+
+html:root[data-bs-theme="dark"] .alert-info {
+	border-color: rgba(0, 95, 190, 0.6);
+	background-color: rgba(0, 95, 190, 0.18);
+	color: #c7ddf0;
+}
+
+html:root[data-bs-theme="dark"] :is(.alert-success, .alert-info) .alert-link {
+	color: #fff;
+}
+
+/* --- Solid blue tiles for a short list (a dashboard, a project's components),
+   as the gallery's node cards; a long list (languages) stays off-white. */
+
+table.vt-tiles:not(.vt-compact, .vt-status) tbody tr {
+	border-color: #005fbe;
+	background: #005fbe;
+	color: #fff;
+}
+
+table.vt-tiles:not(.vt-compact, .vt-status) tbody tr:is(:hover, :focus-within) {
+	border-color: #00499f;
+	background: #00499f;
+	box-shadow: 0 0 0 0.5rem rgba(0, 95, 190, 0.12);
+}
+
+/* Bootstrap gives each table cell its own colour. */
+table.vt-tiles:not(.vt-compact, .vt-status) tbody tr > *,
+table.vt-tiles:not(.vt-compact, .vt-status) :is(th, td) a {
+	color: #fff;
+}
+
+table.vt-tiles:not(.vt-compact, .vt-status) td.vt-show::after {
+	color: rgba(255, 255, 255, 0.75);
+}
+
+table.vt-tiles:not(.vt-compact, .vt-status) .progress-stacked {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+table.vt-tiles:not(.vt-compact, .vt-status) .progress-bar {
+	background: #fff;
+}
+
+table.vt-tiles:not(.vt-compact, .vt-status) .progress-bar-success {
+	background: #f7ab3e; /* the gallery's orange: translated, not yet approved */
+}
+
+/* --- Language lists: the numbers a translator acts on, nothing more ------- */
+
+/* Columns kept: Language, Approved, Translated, Unreviewed, Unfinished,
+   Suggestions. Hidden: unfinished words and characters, untranslated (the
+   same as unfinished here), checks and comments; they remain in Insights. */
+.progress-table .zero-width-720,
+.progress-table .zero-width-768,
+.progress-table .zero-width-1000,
+.progress-table .zero-width-1200,
+.progress-table .zero-width-1400 {
+	display: none;
+}
+
+/* Red alert icons next to every language are for administrators (they are
+   listed under Diagnostics); for translators they read as "something broke". */
+.progress-table .state-icon.red {
+	display: none;
+}
+
+/* --- Project and component lists as tiles (see victron.js) ----------------- */
+
+table.vt-tiles {
+	display: block;
+	margin-top: 0.5rem;
+}
+
+table.vt-tiles thead,
+table.vt-tiles td.actions,
+table.vt-tiles td.number:not(.vt-show) {
+	display: none;
+}
+
+table.vt-tiles tbody {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+	gap: 1rem;
+}
+
+table.vt-tiles tbody tr {
+	position: relative;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
+	gap: 0.75rem 1.75rem;
+	padding: 1.1rem 1.25rem 1rem;
+	border: 1px solid var(--vt-border);
+	border-radius: var(--vt-radius);
+	background: var(--vt-surface);
+	transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+}
+
+/* Hover, as the gallery's cards: the tile turns white inside a wide
+   off-white ring, instead of underlining the name. */
+table.vt-tiles tbody tr:hover,
+table.vt-tiles tbody tr:focus-within {
+	background: var(--bs-body-bg);
+	box-shadow: 0 0 0 0.5rem var(--vt-surface);
+}
+
+table.vt-tiles tbody tr > * {
+	display: block;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	box-shadow: none;
+	text-align: left;
+}
+
+table.vt-tiles th.object-link {
+	flex: 1 0 100%;
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+/* The whole tile opens the project; the numbers keep their own links. */
+table.vt-tiles th.object-link > a,
+table.vt-tiles th.object-link > a:hover,
+table.vt-tiles th.object-link > a:focus {
+	color: inherit;
+	text-decoration: none;
+	outline: none;
+}
+
+table.vt-tiles th.object-link > a::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+}
+
+table.vt-tiles td.vt-show a {
+	position: relative;
+	z-index: 1;
+}
+
+table.vt-tiles th.object-link .progress-stacked {
+	margin-top: 0.75rem;
+	height: 6px;
+	border-radius: 3px;
+}
+
+table.vt-tiles td.vt-show {
+	font-size: 1.15rem;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+table.vt-tiles td.vt-show::after {
+	content: attr(data-label);
+	display: block;
+	color: var(--vt-muted);
+	font-size: 0.8rem;
+	font-weight: normal;
+}
+
+/* Long lists (the languages): smaller tiles, more per row. */
+table.vt-tiles.vt-compact tbody {
+	grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+	gap: 0.75rem;
+}
+
+table.vt-tiles.vt-compact tbody tr {
+	gap: 0.5rem 1.25rem;
+	padding: 0.8rem 1rem 0.75rem;
+}
+
+table.vt-tiles.vt-compact th.object-link {
+	font-size: 1.05rem;
+}
+
+table.vt-tiles.vt-compact th.object-link .progress-stacked {
+	margin-top: 0.5rem;
+}
+
+table.vt-tiles.vt-compact td.vt-show {
+	font-size: 1rem;
+}
+
+/* A translation's string status table: one tile per row, the whole tile opens the strings. */
+table.vt-status tbody {
+	grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+	gap: 0.75rem;
+}
+
+table.vt-status tbody tr {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas: "legend label" "count count" "actions actions";
+	align-items: center;
+	align-content: start;
+	gap: 0.5rem 0.6rem;
+	padding: 0.8rem 1rem 0.7rem;
+	cursor: pointer;
+}
+
+table.vt-status td.legend {
+	grid-area: legend;
+	align-self: start;
+	margin-top: 0.15rem;
+}
+
+table.vt-status td.full-cell {
+	grid-area: label;
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+table.vt-status td.full-cell a {
+	color: inherit;
+	text-decoration: none;
+}
+
+table.vt-status th.number {
+	grid-area: count;
+	color: var(--vt-muted);
+	font-size: 0.8rem;
+	font-weight: normal;
+}
+
+table.vt-status th.number span {
+	display: inline;
+	padding: 0;
+}
+
+table.vt-status th.number span:first-child {
+	display: block;
+	color: var(--wl-color-link);
+	font-size: 1.35rem;
+	font-weight: 600;
+	line-height: 1.2;
+}
+
+table.vt-status th.number span:not(:first-child)::after {
+	content: " " attr(data-label);
+	text-transform: lowercase;
+}
+
+table.vt-status th.number span:nth-child(3)::before {
+	content: " · ";
+}
+
+table.vt-status td.wrap-cell:not(.number) {
+	grid-area: actions;
+	font-size: 0.85rem;
+}
+
+table.vt-status td.wrap-cell .btn-inline {
+	margin-right: 0.9rem;
+	padding: 0;
+}
+
+/* "Read-only strings" on a project's language page counts the shared glossary's
+   untranslatable terms, but its list searches only the project's own
+   components and comes back empty (Weblate 2026.10, reported upstream as
+   WeblateOrg/weblate#22916; glossaries/README.md).
+   Translators can't change these strings anyway. */
+tr[data-href*="q=state:read-only"] {
+	display: none !important;
+}
+
+/* "Not translated here" and similar state icons: the numbers say enough. */
+table.vt-tiles .state-icon {
+	display: none;
+}
+
+/* Dark: a ring barely shows on a dark page; the tile takes a tint of the link
+   colour instead. */
+:where([data-bs-theme="dark"]) table.vt-tiles.vt-compact tbody tr:hover,
+:where([data-bs-theme="dark"]) table.vt-tiles.vt-compact tbody tr:focus-within,
+:where([data-bs-theme="dark"]) table.vt-status tbody tr:hover,
+:where([data-bs-theme="dark"]) table.vt-status tbody tr:focus-within {
+	border-color: var(--wl-color-link);
+	background: color-mix(in srgb, var(--wl-color-link) 8%, var(--bs-body-bg));
+	box-shadow: none;
+}
+
+/* --- Translate page --------------------------------------------------------- */
+
+/* Previous / next is all most people need; first, last and section jumps go. */
+#button-first,
+#button-end,
+#prev-section,
+#next-section {
+	display: none;
+}
+
+#search-cache-help {
+	display: none;
+}
+
+/* The English text is what you translate: give it room. */
+.source-language-group .list-group-item-text {
+	font-size: 1.25rem;
+	line-height: 1.5;
+}
+
+.source-language-group .list-group-item {
+	border: 0;
+	border-radius: var(--vt-radius) !important;
+	background: #f4f6f8;
+	padding: 0.75rem 1rem;
+}
+
+/* The visible text is an overlay (.highlighted-output) on a transparent
+   textarea; both need the same font, or the cursor drifts from the text. */
+.translation-form .editor-wrap .translation-editor,
+.translation-form .editor-wrap .highlighted-output {
+	font-size: 1.15rem;
+	line-height: 1.5;
+}
+
+.translation-form .editor-wrap .translation-editor {
+	border-radius: var(--vt-radius);
+	min-height: 4.5rem;
+}
+
+/* The context (the QML file, the JSON key) is for reference, not reading. */
+.source-language-group .float-end {
+	color: var(--vt-muted);
+	font-size: 0.85rem;
+}
+
+.source-language-group .float-end label {
+	font-weight: normal;
+}
+
+/* Special characters (NBS, quotes, dashes) stay available but quiet until you
+   point at them. */
+.editor-toolbar .specialchar {
+	border-color: transparent;
+	color: var(--vt-muted);
+	opacity: 0.45;
+}
+
+.editor-toolbar:hover .specialchar {
+	opacity: 1;
+}
+
+/* One clear main action: "Save and continue"; "Save and stay" is secondary. */
+.translation-form .card-footer .btn-primary {
+	padding: 0.5rem 1.4rem;
+	font-weight: 600;
+}
+
+.translation-form .card-footer .btn-primary.btn-spaced {
+	background: transparent;
+	color: var(--wl-color-link);
+	font-weight: normal;
+}
+
+/* "Suggest" and "Tools" are secondary to saving. */
+.translation-form .card-footer .btn-warning,
+.translation-form .card-footer #unit_tools_dropdown {
+	background: transparent;
+	border-color: transparent;
+	color: var(--wl-color-link);
+	font-weight: normal;
+}
+
+/* Sidebar: wider, so a screenshot is readable, with the screenshots on top. */
+@media (min-width: 992px) {
+	.row:has(> .source-info) > .col-sm-9 {
+		flex: 0 0 60%;
+		max-width: 60%;
+	}
+
+	.row > .source-info {
+		flex: 0 0 40%;
+		max-width: 40%;
+	}
+}
+
+.source-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.source-info > .card:has(#edit-screenshot),
+.source-info > .card:has(.thumbnail) {
+	order: -1;
+}
+
+/* Screenshot management (add, upload, manage) belongs on the screenshots page. */
+.source-info .card:has(#edit-screenshot) .card-footer-links {
+	display: none !important; /* Bootstrap's d-flex is !important too */
+}
+
+.source-info .thumbnail img {
+	border-radius: 6px;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+/* Empty fields say nothing: no glossary match, no explanation, no labels or
+   flags. Hide them; whatever is filled in still shows. */
+.source-info .card:has(a[href*="/glossary/"]) .list-group-item:has(table td > em) {
+	display: none;
+}
+
+.source-info .list-group-item:has(> em),
+.source-info #info_all_flags:has(#unit_all_flags > em) {
+	display: none;
+}
+
+/* Nearby strings and the other tabs: a short, scrollable list instead of a
+   table that pushes everything else off the page. */
+.tab-content > .tab-pane#nearby {
+	max-height: 24rem;
+	overflow-y: auto;
+	border-bottom: 1px solid var(--vt-border);
+}
+
+/* Tabs on one line. */
+.nav-pills .nav-link {
+	padding: 0.4rem 0.6rem;
+	font-size: 0.9rem;
+}
+
+/* "Details" is a plain link, not a big grey button. */
+.source-info .accordion-button {
+	background: transparent;
+	box-shadow: none;
+	padding: 0.5rem 0;
+	font-weight: normal;
+	color: var(--wl-color-link);
+}
+
+.source-info .accordion-item {
+	border: 0;
+}
+
+#nearby td:first-child {
+	color: var(--vt-muted);
+	font-size: 0.85rem;
+}
+
+:where([data-bs-theme="dark"]) .source-language-group .list-group-item {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+/* The status badge next to the breadcrumb links to the widgets page (badges for
+   READMEs); it stays in the menu, and the tiles already show the percentage. */
+a:has(> img[src*="/svg-badge.svg"]) {
+	display: none;
+}
+
+/* --- Line breaks and odd whitespace in a text --------------------------------
+   Weblate boxes every line break in dotted red, like a mistake. A line break
+   is normal here: its mark stays, small and grey. Whitespace that usually is
+   a mistake (double or trailing spaces, non-breaking spaces) gets a soft red
+   tint instead of a dotted box. */
+
+.space-nl::before,
+.token.newline::before {
+	outline: 0;
+	font-size: 0.8em;
+	opacity: 0.5;
+}
+
+.hlspace,
+.nbsp {
+	outline: 0;
+	border-radius: 3px;
+	background-color: rgba(204, 61, 32, 0.2);
+}
+
+.hlspace:has(> .space-nl:only-child),
+.hlspace:has(> .token.newline:only-child) {
+	background-color: transparent;
+}
+
+/* --- Translate and Zen pages: air at the sides, a toolbar without boxes ------ */
+
+.main-content.js-editor {
+	padding-left: clamp(1rem, 3vw, 3rem);
+	padding-right: clamp(1rem, 3vw, 3rem);
+}
+
+body:has(.main-content.js-editor) .breadcrumb {
+	padding-left: calc(clamp(1rem, 3vw, 3rem) + 15px);
+}
+
+/* Room above and below the toolbar, so the breadcrumb, the toolbar and the
+   first string each stand on their own. */
+body:has(.main-content.js-editor) .breadcrumb {
+	padding-top: 1.25rem;
+	padding-bottom: 0.25rem;
+}
+
+.js-editor .query-container {
+	margin-bottom: 1rem;
+	padding-top: 1.25rem;
+}
+
+/* "Exit Zen" and its neighbours float right of the toolbar: on one line with it. */
+.js-editor .btn-group-settings {
+	margin-top: 1rem;
+}
+
+.js-editor .result-page-form .search-group {
+	margin-right: 1.5rem;
+}
+
+/* Position, filters, sort: plain buttons that tint on hover. */
+/* Weblate's dark theme sets border-color to this with !important; html:root
+   outranks our dark .btn-outline-primary rule, in its own rule so the hover
+   below still outranks the background. */
+html:root .js-editor .result-page-form .btn-outline-primary {
+	--bs-btn-border-color: transparent;
+}
+
+.js-editor .result-page-form .btn-outline-primary {
+	border-color: transparent;
+	border-radius: var(--vt-pill) !important;
+	background: transparent;
+	color: var(--wl-color-link);
+}
+
+.js-editor .result-page-form .btn-outline-primary:hover,
+.js-editor .result-page-form .btn-outline-primary.show {
+	background: rgba(128, 128, 128, 0.12);
+	color: var(--wl-color-link);
+}
+
+.js-editor .result-page-form .position-input {
+	color: var(--vt-muted);
+}
+
+/* The search: one round field holding the filter menu, the query and refresh.
+   The radius is half a line's height: a pill on one line, round corners on more. */
+.js-editor .query-field {
+	border: 1px solid var(--vt-border);
+	border-radius: 1.25rem;
+	background: var(--vt-surface);
+}
+
+.js-editor .query-field:focus-within {
+	box-shadow: 0 0 0 2px color-mix(in srgb, var(--wl-color-link) 45%, transparent);
+}
+
+.js-editor .query-field textarea.form-control,
+.js-editor .query-field .highlighted-output {
+	border-color: transparent;
+	background: transparent;
+	box-shadow: none;
+	resize: none;
+}
+
+/* The Filters menu: plain names, without the query code behind each one, and
+   only the filters a translator uses. The others can still be typed. */
+.js-editor .query-field .dropdown-menu .dropdown-item {
+	padding: 0.4rem 1rem;
+	font-size: 0;
+}
+
+.js-editor .query-field .dropdown-menu .dropdown-item .title {
+	font-size: 0.95rem;
+}
+
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="translated"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="nosuggestions"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="variants"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="screenshots"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="labels"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="context"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="source_comments"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="comments_by_me"]),
+.js-editor .query-field .dropdown-menu li:has(> [data-filter="source_comments_by_me"]) {
+	display: none;
+}
+
+/* The three "search where" entries victron.js adds to the Filters menu. */
+.js-editor .query-field .dropdown-menu .dropdown-item.vt-scope {
+	font-size: 0.95rem;
+}
+
+/* A search match in a translation (victron.js), in the colour Weblate gives
+   one in the English text. */
+::highlight(vt-search) {
+	background-color: var(--wl-color-warning-soft);
+}
+
+/* Room for a query with a filter and a word; a longer one gets more lines
+   instead of scrolling out of sight. */
+.js-editor .query-field {
+	flex: 0 1 34rem;
+	width: auto;
+	height: auto;
+	align-items: flex-start;
+}
+
+.js-editor .query-field textarea.form-control {
+	field-sizing: content;
+	width: 100%;
+	min-height: 38px;
+}
+
+/* The query takes all the room between Filters and the refresh button. */
+.js-editor .query-field .editor-wrap {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+/* --- Zen mode: a list to scan, click a translation to edit it ---------------
+   Weblate shows every string as a form: a context line, a boxed English text,
+   a language label, special characters, a three-line field, its length and
+   the review state. Here a string is two texts next to each other with the
+   context small below the English; the translation becomes a field when you
+   click it. Review state, special characters and length show for the string
+   you point at or edit, in space that is otherwise empty, so nothing moves.
+   The coloured bar on the left still shows each string's state.
+
+   Weblate's table rows (context, English, field) can't be reordered as a
+   table, so each string is a grid and the rows only pass their cells on. */
+
+table.zen,
+table.zen > tfoot {
+	display: block;
+}
+
+/* The end-of-list message and the loading row: no table lines around them. */
+table.zen > tbody:not(.zen-unit) td,
+table.zen > tfoot td {
+	display: block;
+	border: 0;
+}
+
+.zen-unit {
+	display: grid;
+	grid-template-columns: 16px minmax(0, 1fr) minmax(0, 1fr);
+	padding: 0.7rem 0.5rem 0.7rem 1rem;
+	border-radius: var(--vt-radius);
+	/* A faint line above, drawn as a background so the round corners don't bend it. */
+	background: linear-gradient(rgba(128, 128, 128, 0.14), rgba(128, 128, 128, 0.14)) top / calc(100% - 2rem) 1px no-repeat;
+	background-color: transparent !important; /* no tint on every other string */
+}
+
+/* The string you point at or edit: a soft rounded band, without its lines. */
+.zen-unit:hover,
+.zen-unit:focus-within {
+	background-color: var(--vt-surface) !important;
+	box-shadow: inset 0 0 0 1px var(--vt-border);
+}
+
+.zen-unit:first-child,
+.zen-unit:hover,
+.zen-unit:focus-within,
+.zen-unit:hover + .zen-unit,
+.zen-unit:focus-within + .zen-unit {
+	background-image: none;
+}
+
+.zen-unit > tr {
+	display: contents;
+}
+
+table.zen .zen-unit td {
+	display: block;
+	width: auto;
+	padding: 0 1rem;
+	border: 0;
+	box-shadow: none;
+}
+
+.zen-unit .translatetext {
+	background-color: transparent !important; /* Weblate: grey, and !important */
+}
+
+/* The state, as a mark in front of the string instead of a bar. Weblate's two
+   greens are nearly the same, so the shape tells them apart: approved is a
+   filled circle with a check, translated (waiting for review) a green ring,
+   not done a grey ring, a failing string a red dot. */
+table.zen .zen-unit td.unit-state-cell {
+	grid-column: 1;
+	grid-row: 1;
+	align-self: start;
+	min-width: 0;
+	height: 16px;
+	margin-top: 0.45rem;
+	padding: 0 !important;
+	border-radius: 50%;
+}
+
+table.zen .zen-unit td.unit-state-approved {
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.2 8.3l2.5 2.5 5.1-5.4' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+table.zen .zen-unit td.unit-state-translated {
+	background-color: transparent !important;
+	box-shadow: inset 0 0 0 2px #158068;
+}
+
+table.zen .zen-unit td.unit-state-todo {
+	background-color: transparent !important;
+	box-shadow: inset 0 0 0 2px rgba(128, 128, 128, 0.45);
+}
+
+.zen-unit .translatetext {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.zen-unit .translator {
+	grid-column: 3;
+	grid-row: 1 / span 2;
+}
+
+.zen-unit > tr[id^="row-status-"] > td {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+/* Suggestions from other people always show under their string; Weblate hides
+   them behind a "Show suggestions" button in the toolbar. */
+table.zen.zen-hide-suggestions .zen-suggestions-row {
+	display: contents;
+}
+
+#zen-toggle-suggestions {
+	display: none;
+}
+
+/* Explanation and suggestions: below, over the full width, each on a row of
+   its own (the explanation's cell is a .translatetext too, which sits on row 1). */
+.zen-unit > tr[id^="row-explanation-"] > td,
+.zen-unit > .zen-suggestions-row > td {
+	grid-column: 2 / -1;
+	grid-row: auto;
+}
+
+.zen-unit > tr[id^="row-explanation-"] > .unit-state-cell,
+.zen-unit > .zen-suggestions-row > .unit-state-cell,
+.zen-unit > tr[id^="row-source-"] > td:not([class]) {
+	display: none;
+}
+
+/* Top to bottom: English, translation, context. */
+.zen:not(.zen-horizontal) .zen-unit {
+	grid-template-columns: 16px minmax(0, 1fr);
+}
+
+.zen:not(.zen-horizontal) .translator {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.zen:not(.zen-horizontal) .zen-unit > tr[id^="row-status-"] > td {
+	grid-row: 3;
+}
+
+/* The context: a small grey label. The file and line, which follow it as bare
+   text, and the two links show for the string you point at or edit. */
+.zen-unit > tr[id^="row-status-"] > td {
+	color: var(--vt-muted);
+	font-size: 0;
+	line-height: 1.5rem;
+}
+
+.zen-unit:hover > tr[id^="row-status-"] > td,
+.zen-unit:focus-within > tr[id^="row-status-"] > td {
+	font-size: 0.75rem;
+}
+
+.zen-unit > tr[id^="row-status-"] > td > .bidi-isolate {
+	margin-right: 0.5rem;
+	padding: 0.1rem 0.45rem;
+	border-radius: 5px;
+	background: rgba(128, 128, 128, 0.12);
+	font-size: 0.75rem;
+}
+
+.zen-unit .btn-padded,
+.zen-unit .list-group-item .btn {
+	opacity: 0;
+}
+
+.zen-unit:hover .btn-padded,
+.zen-unit:focus-within .btn-padded,
+.zen-unit:hover .list-group-item .btn,
+.zen-unit:focus-within .list-group-item .btn {
+	opacity: 1;
+}
+
+/* "English" and "Dutch" above every string: the breadcrumb says it once.
+   Kept where they tell things apart: secondary languages and plural forms. */
+.zen-unit .translatetext > .form-group:only-child > a.language,
+.zen-unit .mb-3:not(:has(.translation-item ~ .translation-item)) > .translation-item > label {
+	display: none;
+}
+
+.zen-unit .translatetext > .form-group:only-child,
+.zen-unit .translator form > .mb-3 {
+	margin-bottom: 0 !important;
+}
+
+/* The English text: plain text, on one line with the translation. */
+.zen-unit .translatetext > .form-group:only-child .list-group-item {
+	border: 0;
+	background: transparent;
+	padding: calc(0.3rem + 1px) 0;
+}
+
+.zen-unit .list-group-item-text,
+.zen .editor-wrap .translation-editor,
+.zen .editor-wrap .highlighted-output {
+	font-size: 1.05rem;
+	line-height: 1.4;
+}
+
+/* The translation: text until you point at it (a light tint) or click it (a
+   field). Weblate draws the text in .highlighted-output, under a transparent
+   textarea. An empty one keeps a tint, so it can be found. */
+.zen .editor-wrap .translation-editor,
+.zen .editor-wrap .highlighted-output {
+	padding: 0.3rem 0.6rem;
+	border-color: transparent;
+	border-radius: 8px;
+	box-shadow: none;
+	background-color: transparent;
+	resize: none;
+}
+
+.zen-unit:hover .editor-wrap .highlighted-output,
+.zen .editor-wrap .highlighted-output:empty {
+	background-color: color-mix(in srgb, var(--wl-color-link) 7%, transparent);
+}
+
+.zen .editor-wrap .translation-editor:focus {
+	border-color: var(--wl-color-link);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--wl-color-link) 18%, transparent);
+}
+
+.zen .editor-wrap:focus-within .highlighted-output {
+	background-color: var(--bs-body-bg);
+}
+
+/* Weblate's script sets the height to fit the text, but never below the three
+   lines it starts with (an inline min-height). */
+.zen .editor-wrap .translation-editor {
+	min-height: 0 !important;
+}
+
+/* Review state, special characters and length: one line under the field, next
+   to the context (top to bottom: on the context line), for the string you
+   point at or edit. */
+.zen-unit .translator form {
+	position: relative;
+}
+
+.zen-horizontal .translator form {
+	padding-bottom: 1.75rem;
+}
+
+.zen-unit .translator form > div:has(.review_radio),
+.zen-unit .editor-toolbar,
+.zen-unit .editor-footer {
+	position: absolute;
+	top: calc(100% - 1.45rem);
+	visibility: hidden;
+	margin: 0;
+	white-space: nowrap;
+	line-height: 1.5rem;
+}
+
+.zen:not(.zen-horizontal) .translator form > div:has(.review_radio),
+.zen:not(.zen-horizontal) .editor-toolbar,
+.zen:not(.zen-horizontal) .editor-footer {
+	top: calc(100% + 0.3rem);
+}
+
+.zen-unit:hover .translator form > div:has(.review_radio),
+.zen-unit:focus-within .translator form > div:has(.review_radio),
+.zen-unit:focus-within .editor-toolbar,
+.zen-unit:focus-within .editor-footer {
+	visibility: visible;
+}
+
+.zen-unit .translator form > div:has(.review_radio) {
+	left: 0.6rem;
+}
+
+.zen-unit .editor-toolbar {
+	right: 5rem;
+}
+
+.zen-unit .editor-footer {
+	right: 0.3rem;
+}
+
+/* Plurals: each form has its own toolbar and length; they stay under their own
+   field instead of on one line. */
+.zen-unit form:has(.translation-item ~ .translation-item) :is(.editor-toolbar, .editor-footer) {
+	position: static;
+}
+
+/* Top to bottom, the context line's own two links are at the far right. */
+.zen:not(.zen-horizontal) .translator form > div:has(.review_radio) {
+	left: 35%;
+}
+
+/* The translation's text right under the English text. */
+.zen:not(.zen-horizontal) .translator form {
+	margin-left: calc(-0.6rem - 1px);
+}
+
+.zen:not(.zen-horizontal) .editor-toolbar {
+	right: 10rem;
+}
+
+.zen:not(.zen-horizontal) .editor-footer {
+	right: 5rem;
+}
+
+/* Weblate's "Unsaved changes!": on the same line, after the review state. */
+.zen-unit .translation-item > .text-warning {
+	position: absolute;
+	top: calc(100% - 1.45rem);
+	left: 19.5rem;
+	font-size: 0.75rem;
+	line-height: 1.3rem;
+	white-space: nowrap;
+}
+
+.zen:not(.zen-horizontal) .translation-item > .text-warning {
+	top: calc(100% + 0.3rem);
+	left: calc(35% + 19rem);
+}
+
+.zen-unit .translator legend {
+	display: none;
+}
+
+/* The review state: three small pills instead of radio buttons. The chosen
+   one looks like the string's state mark: approved filled green with a check,
+   waiting for review a green ring, needs editing a grey ring. */
+.zen-unit .translator .form-check {
+	min-height: 0;
+	margin: 0 0.25rem 0 0;
+	padding: 0;
+}
+
+.zen-unit .translator .form-check-input {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.zen-unit .translator .form-check-label {
+	padding: 0 0.6rem;
+	border-radius: 999px;
+	color: var(--vt-muted);
+	font-size: 0.75rem;
+	font-weight: normal;
+	line-height: 1.35rem;
+	cursor: pointer;
+}
+
+.zen-unit .translator .form-check-input:not(:checked):not(:disabled) + .form-check-label:hover {
+	background: rgba(128, 128, 128, 0.16);
+}
+
+.zen-unit .translator .form-check-input:focus-visible + .form-check-label {
+	outline: 2px solid var(--wl-color-link);
+	outline-offset: 1px;
+}
+
+.zen-unit .translator .form-check-input:checked + .form-check-label {
+	box-shadow: inset 0 0 0 1.5px rgba(128, 128, 128, 0.55);
+	color: inherit;
+}
+
+.zen-unit .translator .form-check-input[value="20"]:checked + .form-check-label {
+	box-shadow: inset 0 0 0 1.5px #158068;
+	color: #158068;
+}
+
+.zen-unit .translator .form-check-input[value="30"]:checked + .form-check-label {
+	box-shadow: none;
+	background: #107a62;
+	color: #fff;
+}
+
+.zen-unit .translator .form-check-input[value="30"]:checked + .form-check-label::before {
+	content: "\2713\00a0";
+}
+
+.zen-unit .editor-toolbar .specialchar {
+	padding: 0 0.3rem;
+	line-height: 1.3rem;
+}
+
+/* A narrow window has no room for the special characters next to the review
+   state; they stay in the full editor (the pencil). */
+@media (max-width: 1699px) {
+	.zen-unit .editor-toolbar {
+		display: none;
+	}
+}
+
+/* Translation memory matches for an empty translation (victron.js): a click
+   puts one in the field. */
+.vt-memory {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.4rem;
+	padding: 0.35rem 0 0.1rem;
+}
+
+.vt-memory button {
+	padding: 0.2rem 0.7rem;
+	border: 0;
+	border-radius: 999px;
+	background: color-mix(in srgb, var(--wl-color-link) 10%, transparent);
+	color: inherit;
+	font-size: 0.95rem;
+	text-align: left;
+}
+
+.vt-memory button:hover,
+.vt-memory button:focus-visible {
+	background: color-mix(in srgb, var(--wl-color-link) 22%, transparent);
+}
+
+.vt-memory small {
+	margin-left: 0.5rem;
+	color: var(--vt-muted);
+}
+
+/* Screenshots of the string being edited in Zen (victron.js): small images
+   under the context, shown for that string only; a click shows one large. */
+/* One line; a common text ("Disabled") can be on many screens, the rest
+   scroll sideways. */
+.zen-unit .vt-shots {
+	display: none;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
+	padding-bottom: 0.25rem;
+	overflow-x: auto;
+	scrollbar-width: thin;
+}
+
+.vt-shots button {
+	flex: none;
+}
+
+.zen-unit.vt-active .vt-shots {
+	display: flex;
+}
+
+.vt-shots button {
+	padding: 0;
+	border: 1px solid rgba(128, 128, 128, 0.25);
+	border-radius: 6px;
+	background: none;
+	overflow: hidden;
+	cursor: zoom-in;
+}
+
+.vt-shots button:hover,
+.vt-shots button:focus-visible {
+	border-color: var(--wl-color-link);
+}
+
+.vt-shots img {
+	display: block;
+	height: 6rem;
+	width: auto;
+}
+
+dialog.vt-shot-dialog {
+	max-width: min(92vw, 1400px);
+	padding: 0.75rem;
+	border: 0;
+	border-radius: var(--vt-radius);
+	background: var(--bs-body-bg);
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+	outline: 0;
+	cursor: zoom-out;
+}
+
+dialog.vt-shot-dialog::backdrop {
+	background: rgba(0, 0, 0, 0.55);
+}
+
+/* Screenshots are small (gui-v2: 480 × 272): shown at twice their size. */
+dialog.vt-shot-dialog img {
+	display: block;
+	width: min(88vw, 960px);
+	height: auto;
+	max-height: 82vh;
+	object-fit: contain;
+	margin: 0 auto;
+	border-radius: 6px;
+}
+
+dialog.vt-shot-dialog p {
+	margin: 0.5rem 0 0;
+	color: var(--vt-muted);
+	font-size: 0.8rem;
+	text-align: center;
+}
